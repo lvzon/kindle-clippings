@@ -1,8 +1,26 @@
 #!/usr/bin/python3
 
 '''
-Written by Levien van Zon (levien at gnuritas.org), 2018
+A Python-script to extract and organise highlights and notes from the "My Clippings.txt" file on a Kindle e-reader. 
+
 Usage: extract-kindle-clippings.py <My Clippings.txt file> [<output directory>]
+
+GIT-repository at: https://github.com/lvzon/kindle-clippings
+
+    Copyright 2018, Levien van Zon (gnuritas.org)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 '''
 
 import re
@@ -29,9 +47,9 @@ if len(sys.argv) > 2:
 else:
     outpath = 'clippings/'
 
-# TODO: make output directory if it doesn't exist, by executing mkdir -p
-# if not os.path.isdir(outpath): ...
-    
+if not os.path.isdir(outpath):
+    # Create output path if it doesn't exist
+    os.makedirs(outpath, exist_ok=True)    
 
 def getvalidfilename(filename):
     import unicodedata
