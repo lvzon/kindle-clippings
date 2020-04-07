@@ -85,6 +85,8 @@ existing_hashes = {}
 print('Scanning output dir', outpath)
 for directory, subdirlist, filelist in os.walk(outpath):
     for fname in filelist:
+        if fname.startswith("."):
+            continue
         ext = fname[-4:]
         if ext == '.rst' or ext == '.RST':
             print('Found RST file', fname, 'in directory', directory)
