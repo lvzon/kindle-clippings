@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 '''
 A Python-script to extract and organise highlights and notes from the "My Clippings.txt" file on a Kindle e-reader. 
@@ -40,7 +40,7 @@ if not os.path.isfile(infile):
     username = getpass.getuser()
     infile = '/media/' + username + '/Kindle/documents/My Clippings.txt'
     if not os.path.isfile(infile):
-        print('Could not find "My Clippings.txt", please provide the file location as an argument\nUsage: ' + argv[0] + ' <clippings file> [<output directory>]\n')
+        print('Could not find "My Clippings.txt", please provide the file location as an argument\nUsage: ' + sys.argv[0] + ' <clippings file> [<output directory>]\n')
 
 if len(sys.argv) > 2:
     outpath = sys.argv[2]
