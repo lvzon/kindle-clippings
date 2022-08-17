@@ -7,7 +7,8 @@ Usage: extract-kindle-clippings.py <My Clippings.txt file> [<output directory>]
 
 GIT-repository at: https://github.com/lvzon/kindle-clippings
 
-    Copyright 2018,2022, Levien van Zon (gnuritas.org), incorporating modifications by Ivan Vendrov
+    Copyright 2018,2022, Levien van Zon (gnuritas.org), 
+    incorporating modifications by Ivan Vendrov and Michal Kašpárek
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -130,7 +131,7 @@ while line:
     else:
         title = key
         author = 'Unknown'
-        
+    
     if len(result_loc):
         note_loc = result_loc[0]
     else:
@@ -189,6 +190,9 @@ for key in pub_title.keys():
     short_title = title.split('|')[0]
     short_title = short_title.split(' - ')[0]
     short_title = short_title.split('. ')[0]
+    short_title = short_title.replace('?','')
+    short_title = short_title.replace(':','')
+    short_title = short_title.replace('*','')
     if len(short_title) > 128:
         short_title = short_title[:127]
     if (nr_notes > 2):
