@@ -7,7 +7,7 @@ Usage: extract-kindle-clippings.py <My Clippings.txt file> [<output directory>]
 
 GIT-repository at: https://github.com/lvzon/kindle-clippings
 
-    Copyright 2018, Levien van Zon (gnuritas.org)
+    Copyright 2018,2022, Levien van Zon (gnuritas.org), incorporating modifications by Ivan Vendrov
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -62,9 +62,9 @@ note_sep = '=========='
 commentstr = '.. '  # RST (reStructuredText) comment
 
 regex_title = re.compile('^(.*)\((.*)\)$')
-regex_info = re.compile(r'^- (\S+) (.*)[\s|]+Added on\s+(.+)$')
-regex_loc = re.compile('Loc\. ([\d\-]+)')
-regex_page = re.compile('Page ([\d\-]+)')
+regex_info = re.compile('^-\s*\S* (\S+) (.*)[\s|]+Added on\s+(.+)$')
+regex_loc = re.compile('[Llocation.]+ ([\d\-]+)')
+regex_page = re.compile('[pP]age ([\d\-]+)')
 regex_date = re.compile('Added on\s+(.+)$')
 
 regex_hashline = re.compile('^\.\.\s*([a-fA-F0-9]+)' + '\s*')
