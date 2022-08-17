@@ -186,6 +186,7 @@ mc.close()
 for key in pub_title.keys():
     nr_notes = len(pub_notes[key])
     author = pub_author[key]
+    author = author.replace(';',', ')
     title = pub_title[key]
     short_title = title.split('|')[0]
     short_title = short_title.split(' - ')[0]
