@@ -34,6 +34,10 @@ import sys
 
 file_encoding = 'utf-8'
 
+# - use this to NFKD if you want
+# - for hangul Windows, use NFC
+filename_unicode_normalize_form = 'NFC'
+
 if len(sys.argv) > 1:
     infile = sys.argv[1]
 else:
@@ -56,7 +60,7 @@ if not os.path.isdir(outpath):
 
 def getvalidfilename(filename):
     import unicodedata
-    clean = unicodedata.normalize('NFKD', filename)
+    clean = unicodedata.normalize(filename_unicode_normalize_form, filename)
     return re.sub('[^\w\s()\'.?!:-]', '', clean)
     
 
