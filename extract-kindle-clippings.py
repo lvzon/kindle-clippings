@@ -32,6 +32,8 @@ from datetime import datetime, timedelta, timezone
 import getpass
 import sys
 
+file_encoding = 'utf-8'
+
 if len(sys.argv) > 1:
     infile = sys.argv[1]
 else:
@@ -92,7 +94,7 @@ for directory, subdirlist, filelist in os.walk(outpath):
         if ext == '.rst' or ext == '.RST':
             print('Found RST file', fname, 'in directory', directory)
             # open file, find commend lines, store hashes
-            rst = open(directory + '/' + fname, 'r')
+            rst = open(directory + '/' + fname, mode='r', encoding=file_encoding)
             line = rst.readline()
             lines = 0
             hashes = 0
@@ -112,7 +114,7 @@ for directory, subdirlist, filelist in os.walk(outpath):
 print('Found', len(existing_hashes), 'existing note hashes')
 print('Processing clippings file', infile)
         
-mc = open(infile, 'r')
+mc = open(infile, mode='r', encoding=file_encoding)
 
 mc.read(1)  # Skip first character
 
@@ -217,7 +219,7 @@ for key in pub_title.keys():
         
     newfile = os.path.isfile(outfile)
     
-    out = open(outfile, 'a')
+    out = open(outfile, mode='a', encoding=file_encoding)
     
     if short:
         # Short note, output a small header and append to short note file
