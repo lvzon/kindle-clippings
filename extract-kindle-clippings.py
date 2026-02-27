@@ -32,6 +32,12 @@ from datetime import datetime, timedelta, timezone
 import getpass
 import sys
 
+file_encoding = 'utf-8'
+
+# - use this to NFKD if you want
+# - for hangul Windows, use NFC
+filename_unicode_normalize_form = 'NFC'
+
 if len(sys.argv) > 1:
     infile = sys.argv[1]
 else:
@@ -54,7 +60,7 @@ if not os.path.isdir(outpath):
 
 def getvalidfilename(filename):
     import unicodedata
-    clean = unicodedata.normalize('NFKD', filename)
+    clean = unicodedata.normalize(filename_unicode_normalize_form, filename)
     return re.sub('[^\w\s()\'.?!:-]', '', clean)
     
 
@@ -92,7 +98,7 @@ for directory, subdirlist, filelist in os.walk(outpath):
         if ext == '.rst' or ext == '.RST':
             print('Found RST file', fname, 'in directory', directory)
             # open file, find commend lines, store hashes
-            rst = open(directory + '/' + fname, 'r')
+            rst = open(directory + '/' + fname, mode='r', encoding=file_encoding)
             line = rst.readline()
             lines = 0
             hashes = 0
@@ -112,7 +118,7 @@ for directory, subdirlist, filelist in os.walk(outpath):
 print('Found', len(existing_hashes), 'existing note hashes')
 print('Processing clippings file', infile)
         
-mc = open(infile, 'r')
+mc = open(infile, mode='r', encoding=file_encoding)
 
 mc.read(1)  # Skip first character
 
@@ -217,7 +223,7 @@ for key in pub_title.keys():
         
     newfile = os.path.isfile(outfile)
     
-    out = open(outfile, 'a')
+    out = open(outfile, mode='a', encoding=file_encoding)
     
     if short:
         # Short note, output a small header and append to short note file
